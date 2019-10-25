@@ -23,7 +23,5 @@ void Scene02::handle_events()
 
 void Scene02::render(Renderer* renderer)
 {
-	renderer->Clear(1.0f, 0.0f, 0.0f, 1.0f);
-
-	renderer->Present(1);
+	renderer->Clear(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
 }

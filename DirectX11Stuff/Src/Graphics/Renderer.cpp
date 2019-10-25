@@ -24,15 +24,15 @@ static void SAFE_RELEASE(T& ptr)
 	}
 }
 
-bool Renderer::Init(Window* window)
+bool Renderer::Init()
 {
 	HRESULT Result = 0;
 	
 	//Create our swap chain buffer description
 	DXGI_MODE_DESC bufferDesc;
 	ZeroMemory(&bufferDesc, sizeof(DXGI_MODE_DESC));
-	bufferDesc.Width = window->mWidth;
-	bufferDesc.Height = window->mHeight;
+	bufferDesc.Width = GameSettings::Display::Width;
+	bufferDesc.Height = GameSettings::Display::Height;
 	bufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 	bufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
 	bufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
@@ -42,11 +42,11 @@ bool Renderer::Init(Window* window)
 	ZeroMemory(&scd, sizeof(DXGI_SWAP_CHAIN_DESC));
 	scd.BufferDesc = bufferDesc;
 	scd.BufferCount = 1;
-	scd.OutputWindow = window->hWND;
+	scd.OutputWindow = GetActiveWindow();
 	scd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 	scd.SampleDesc.Count = 4;
 	scd.SampleDesc.Quality = 0;
-	scd.Windowed = true;
+	scd.Windowed = GameSettings::Display::Windowed;
 	scd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	scd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
@@ -92,8 +92,8 @@ bool Renderer::Init(Window* window)
 
 	D3D11_TEXTURE2D_DESC depthStencilDesc;
 	ZeroMemory(&depthStencilDesc, sizeof(D3D11_TEXTURE2D_DESC));
-	depthStencilDesc.Width = window->mWidth;
-	depthStencilDesc.Height = window->mHeight;
+	depthStencilDesc.Width = GameSettings::Display::Width;
+	depthStencilDesc.Height = GameSettings::Display::Height;
 	depthStencilDesc.MipLevels = 1;
 	depthStencilDesc.ArraySize = 1;
 	depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
@@ -166,8 +166,8 @@ bool Renderer::Init(Window* window)
 	//Create our viewport
 	D3D11_VIEWPORT viewport;
 	ZeroMemory(&viewport, sizeof(D3D11_VIEWPORT));
-	viewport.Width = window->mWidth;
-	viewport.Height = window->mHeight;
+	viewport.Width = GameSettings::Display::Width;
+	viewport.Height = GameSettings::Display::Height;
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
 	viewport.MinDepth = 0.0f;
@@ -178,9 +178,9 @@ bool Renderer::Init(Window* window)
 	return(true);
 }
 
-void Renderer::Clear(float r, float g, float b, float a)
+void Renderer::Clear(D3DXCOLOR color)
 {
-	Context->ClearRenderTargetView(RenderTargetView, D3DXCOLOR(r, g, b, a));
+	Context->ClearRenderTargetView(RenderTargetView, D3DXCOLOR(color.r, color.g, color.b, color.a));
 	Context->ClearDepthStencilView(DepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 }
 

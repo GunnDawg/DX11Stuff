@@ -17,24 +17,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 		case WM_KEYDOWN:
 		{
-			switch (wParam)
-			{
-				case VK_ESCAPE:
-				{
-					game->IsRunning = false;
-				} break;
+			game->KeyBoard.OnKeyPressed(static_cast<u8>(wParam));
+		} break;
 
-				case VK_RIGHT:
-				{
-					game->GSM.pop();
+		case WM_KEYUP:
+		{
+			game->KeyBoard.OnKeyReleased(static_cast<u8>(wParam));
+		} break;
 
-					std::unique_ptr<GameState> S2 = std::make_unique<Scene02>();
-					game->GSM.push(std::move(S2));
-				}
-
-				default:
-					break;
-			}
+		case WM_CHAR:
+		{
+			game->KeyBoard.OnChar(static_cast<u8>(wParam));
 		} break;
 
 		default:

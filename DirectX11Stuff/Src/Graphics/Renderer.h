@@ -2,7 +2,6 @@
 #include <D3D11.h>
 #include <D3DX10.h>
 #include <D3DX11.h>
-#include "Core/Window.h"
 
 #pragma comment(lib, "D3D11.lib")
 #pragma comment(lib, "D3DX10.lib")
@@ -11,9 +10,9 @@
 class Renderer
 {
 public:
-	bool Init(Window* window);
+	bool Init();
 
-	void Clear(float r, float g, float b, float a);
+	void Clear(D3DXCOLOR color);
 	void Present(bool vSync);
 
 	void Shutdown();

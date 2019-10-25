@@ -4,13 +4,13 @@
 #undef CreateWindow
 #endif
 
-struct Window
+class Window
 {
-	bool Init(u16 width, u16 height, WNDPROC wndproc);
+public:
+	bool Init(const WNDPROC& wndproc);
 	void Shutdown();
 
+private:
 	HWND hWND;
 	WNDCLASSEX WC;
-	u16 mWidth;
-	u16 mHeight;
 };

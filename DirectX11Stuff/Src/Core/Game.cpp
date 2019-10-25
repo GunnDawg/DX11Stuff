@@ -16,17 +16,17 @@ Game::~Game()
 	}
 }
 
-bool Game::Init(WNDPROC wndproc)
+bool Game::Init(const WNDPROC& wndproc)
 {
 	Logger::Init();
 
-	if (!mWindow->Init(1600, 900, wndproc))
+	if (!mWindow->Init(wndproc))
 	{
 		LOG_ERROR("Failed to initialize window");
 		return(false);
 	}
 
-	if (!mRenderer->Init(mWindow))
+	if (!mRenderer->Init())
 	{
 		LOG_ERROR("Failed to initialize renderer");
 		return(false);
@@ -61,7 +61,11 @@ void Game::Update()
 
 void Game::Render()
 {
+	mRenderer->Clear(D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
+
 	GSM.render(mRenderer);
+
+	mRenderer->Present(GameSettings::Display::VSync);
 }
 
 void Game::ShutDown()

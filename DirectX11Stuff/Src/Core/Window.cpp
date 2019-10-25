@@ -1,11 +1,8 @@
 #include "PCH.h"
 #include "Core/Window.h"
 
-bool Window::Init(u16 width, u16 height, WNDPROC wndproc)
+bool Window::Init(const WNDPROC& wndproc)
 {
-	mWidth = width;
-	mHeight = height;
-
 	ZeroMemory(&WC, sizeof(WNDCLASSEX));
 	WC.cbSize = sizeof(WNDCLASSEX);
 	WC.hbrBackground = HBRUSH(COLOR_WINDOW);
@@ -28,8 +25,8 @@ bool Window::Init(u16 width, u16 height, WNDPROC wndproc)
 		WS_OVERLAPPED | WS_SYSMENU | WS_MINIMIZEBOX | WS_VISIBLE,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
-		mWidth,
-		mHeight,
+		GameSettings::Display::Width,
+		GameSettings::Display::Height,
 		0,
 		0,
 		GetModuleHandle(0),

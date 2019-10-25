@@ -165,6 +165,7 @@
     <ClCompile Include="Src\Core\Game.cpp" />
     <ClCompile Include="Src\Core\GameStateMachine.cpp" />
     <ClCompile Include="Src\Debugging\Log.cpp" />
+    <ClCompile Include="Src\Input\Keyboard.cpp" />
     <ClCompile Include="Src\PCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PCH.h</PrecompiledHeaderFile>
@@ -182,11 +183,13 @@
     <ClCompile Include="Src\Scenes\Scene02.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Core\GameSettings.h" />
     <ClInclude Include="Src\Core\GameState.h" />
     <ClInclude Include="Src\Core\GameStateMachine.h" />
     <ClInclude Include="Src\Debugging\BenchmarkTimer.h" />
     <ClInclude Include="Src\Core\Game.h" />
     <ClInclude Include="Src\Debugging\Log.h" />
+    <ClInclude Include="Src\Input\Keyboard.h" />
     <ClInclude Include="Src\PCH.h" />
     <ClInclude Include="Src\Graphics\Renderer.h" />
     <ClInclude Include="Src\Core\Window.h" />

@@ -65,3 +65,4 @@ typedef int64_t i64;
 //Internal files
 #include "Debugging/Log.h"
 #include "Debugging/BenchmarkTimer.h"
+#include "Core/GameSettings.h"
